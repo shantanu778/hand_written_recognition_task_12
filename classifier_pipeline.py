@@ -30,9 +30,9 @@ img_folder=r'DSS'
 
 #parameters to be chosen 
 #flag = 0 is the implemented CNN
-flag = args.flag
-n_epochs = args.epochs
-number_of_augmentations_per_class = args.aug_no #if set to 0 -  no data augmentation
+flag = int(args.flag)
+n_epochs = int(args.epochs)
+number_of_augmentations_per_class = int(args.aug_no) #if set to 0 -  no data augmentation
 
 #some transfer learning models are trained on larger image width and height than in our data set and do not work 
 #on smaller sizes
@@ -217,7 +217,7 @@ def train(flag, IMG_WIDTH, IMG_HEIGHT, X_train, y_train, X_val, y_val):
                         y=np.array(y_train, np.float32),validation_data=(np.array(X_val, np.float32), np.array(y_val, np.float32)),
                         epochs=n_epochs, callbacks= [callback])
     if flag == 0:
-        filename = 'model.sav'
+        filename = 'cnn.sav'
     if flag == 1:
         filename = 'inception_v3.sav'
     if flag == 2:
@@ -227,6 +227,7 @@ def train(flag, IMG_WIDTH, IMG_HEIGHT, X_train, y_train, X_val, y_val):
 
     os.makedirs(args.model_dir, exist_ok=True)
     pickle.dump(model, open(f"{args.model_dir}/{filename}", 'wb'))
+    filename = f"{args.model_dir}/{filename}"
     return filename, history
 
 
@@ -262,7 +263,7 @@ def run_pipe():
     filename, history = train(flag, IMG_WIDTH, IMG_HEIGHT, X_train, y_train, X_val, y_val)
     visualize(history)
     _, accuracy = predict(filename, X_test, y_test)
-    print(accuracy)
+    print("Test Accuracy: {accuracy}")
 
 if __name__ == "__main__":
     run_pipe()

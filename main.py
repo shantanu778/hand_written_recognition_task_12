@@ -16,7 +16,7 @@ def main():
     parser.add_argument('--flag', help='Model type 0 to 3.', default=0)
     args = parser.parse_args()
 
-    if args.flag == 0:
+    if int(args.flag) == 0:
         IMG_WIDTH = 60
         IMG_HEIGHT = 40
     else:
@@ -32,7 +32,7 @@ def main():
         imageName = file.split("/")[-1].split(".")[0]
         print(imageName)
         image_names.append(imageName)
-        line_chars, total_space = segment_lines(file, args.verbose)
+        line_chars, total_space = segment_lines(file, int(args.verbose))
         total_files.append(line_chars)
         total_spaces.append(total_space) 
 
