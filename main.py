@@ -39,14 +39,14 @@ def main():
     # print(total_files)
     # print(image_names)
 
-    os.makedirs("Text_files/classifier", exist_ok=True)
-    folder = "Text_files/classifier"
+    os.makedirs("results/", exist_ok=True)
+    folder = "results/"
     
     classifier = args.classifier_path
     loaded_model = pickle.load(open(classifier, 'rb'))
 
     for idx, file in enumerate(total_files):
-        file1 = open(f"{folder}/{image_names[idx]}.txt","a")#append mode
+        file1 = open(f"{folder}/{image_names[idx]}_characters.txt","a")#append mode
         for id, characters in enumerate(file):
             letters, values = classify(characters, loaded_model, IMG_WIDTH, IMG_HEIGHT)
             print("Classify Finished", imageName)

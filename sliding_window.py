@@ -94,8 +94,8 @@ def main():
     dir_path = f"{args.image_path}"
     files = [os.path.join(dir_path, f) for f in os.listdir(dir_path) if os.path.isfile(os.path.join(dir_path, f))]
 
-    os.makedirs("Text_files/sliding_window", exist_ok=True)
-    folder = "Text_files/sliding_window"
+    os.makedirs("results", exist_ok=True)
+    folder = "results"
 
     image_names = []
 
@@ -105,7 +105,7 @@ def main():
         image_names.append(imageName)
         lines, imageName, outputDir  =  segment(file, 'line_images')
 
-        file1 = open(f"{folder}/{imageName}.txt","a")#append mode
+        file1 = open(f"{folder}/{imageName}_characters.txt","a")#append mode
 
         for i in range(len(lines)):
             values = []
