@@ -1,4 +1,4 @@
-# hand_written_recognition_project
+# Hand Written Recognition Project
 
 ## Task 1
 
