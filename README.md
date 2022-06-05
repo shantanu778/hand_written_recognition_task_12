@@ -15,21 +15,25 @@ You can pass the folder path of images by using `--image_path "Path/to/Folder"`
 
 
 ## Character segmentation using prtrained model
-```
-python main.py --image_path "Path/to/Folder" --classifier_path "Path/of/model"
-```
-### Classifier
-The pretrained classifier can be found [here.](https://drive.google.com/drive/folders/1NqDdevh42zpoUPsWMux6de33plXEdUpB). 
-Download the InceptionResNetV2, since it yielded the highest accuracy on the test data. 
-Also, pass the path of the classifier using `--classifier_path "Path/of/model"
-`
+We have 4 different models. The pretrained models can be found [here.](https://drive.google.com/drive/folders/1NqDdevh42zpoUPsWMux6de33plXEdUpB). 
+We recommend to download the InceptionResNetV2, since it yielded the highest accuracy on the test data. 
+Then, pass the path of the classifier using `--classifier_path "Path/of/model"
+
+Use the corresponding *flag* from the following list based on the model you are using for results:
+
+1. scratch implemented CNN (`flag = 0`)
+2. InceptionV3 (`flag = 1`)
+3. ResNet50 (`flag = 2`)
+4. InceptionResNetV2 (`flag = 3`)<br/>
+
 Example:
 ```
-python main.py --image_path "Path/to/Folder" --classifier_path "Path/of/model"
+python main.py --image_path "Path/to/Folder" --classifier_path "Path/to/model" --flag 3
 ```
 
 
 ## Training Classifier
+
 This part is optional and is not required for evaluating the pipeline, as the classifier is already trained.
 If you wish to retrain the classifier you can run:
 
