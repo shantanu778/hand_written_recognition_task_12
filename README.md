@@ -30,7 +30,6 @@ Example:
 ```
 python main.py --image_path "Path/to/Folder" --classifier_path "Path/to/model" --flag 3
 ```
-#character-segmentation-using-pretrained-model
 
 
 ## Training Classifier
