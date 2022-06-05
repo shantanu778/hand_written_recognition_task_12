@@ -21,9 +21,9 @@ python main.py --image_path "Path/to/Folder" --classifier_path "Path/of/model"
 ### Classifier
 The pretrained classifier can be found [here.](https://drive.google.com/drive/folders/1NqDdevh42zpoUPsWMux6de33plXEdUpB). 
 Download the InceptionResNetV2, since it yielded the highest accuracy on the test data. 
-Also, pass the path of the classifier using `--classifier_path "Path/of/model"`
-
-### Sliding Window
+Also, pass the path of the classifier using `--classifier_path "Path/of/model"
+`
+Example:
 ```
 python main.py --image_path "Path/to/Folder" --classifier_path "Path/of/model"
 ```
