@@ -14,4 +14,8 @@ tensorboard-plugin-wit==1.8.1
 tensorflow==2.8.0
 protobuf==3.20.1
 imgaug==0.4.0
+<<<<<<< HEAD
 python-Levenshtein
+=======
+Scikit-learn==1.1.1
+>>>>>>> e7477862ef9be512931617e202f321095a699a63
