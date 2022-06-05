@@ -30,6 +30,7 @@ Example:
 ```
 python main.py --image_path "Path/to/Folder" --classifier_path "Path/to/model" --flag 3
 ```
+#character-segmentation-using-pretrained-model
 
 
 ## Training Classifier
@@ -56,7 +57,7 @@ python classifier_pipeline.py --flag 0 --model_dir "models" --epochs 50 --aug_no
 ## Sliding Window
 
 This approach is also optional and not our best performing approach, however, we include it due to matters of completeness. 
-For evaluating the accuracy of our pipeline please follow the stepts in the section 'Character segmentation using pretrained model' above.
+For evaluating the accuracy of our pipeline please follow the stepts in the section 'Character segmentation using pretrained model'(#character-segmentation-using-pretrained-model) above.
 
 Again, after downloading the pretrained classifier you can choose the classifier by the aforementioned flags.
 Example: 
