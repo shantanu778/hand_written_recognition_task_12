@@ -14,3 +14,4 @@ tensorboard-plugin-wit==1.8.1
 tensorflow==2.8.0
 protobuf==3.20.1
 imgaug==0.4.0
+Scikit-learn==1.1.1
