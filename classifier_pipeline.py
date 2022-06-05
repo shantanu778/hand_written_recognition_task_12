@@ -263,7 +263,7 @@ def run_pipe():
     filename, history = train(flag, IMG_WIDTH, IMG_HEIGHT, X_train, y_train, X_val, y_val)
     visualize(history)
     _, accuracy = predict(filename, X_test, y_test)
-    print("Test Accuracy: {accuracy}")
+    print(f"Test Accuracy: {accuracy}")
 
 if __name__ == "__main__":
     run_pipe()
