@@ -9,9 +9,7 @@ import pickle
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Code for Image Segmentation with Distance Transform and Watershed Algorithm.\
-    Sample code showing how to segment overlapping objects using Laplacian filtering, \
-    in addition to Watershed and Distance Transformation')
+    parser = argparse.ArgumentParser()
     parser.add_argument('--image_path', help='Path to input image.', default='test_image')
     parser.add_argument('--classifier_path', help='Path to Pretrained Model to Classify Character.', default='cnn.sav')
     parser.add_argument('--verbose', help='1 or 0 for saving character images.', default=0)

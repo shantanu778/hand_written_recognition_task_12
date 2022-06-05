@@ -1,4 +1,5 @@
 import pandas as pd
+import argparse
 import numpy as np
 import os
 import tensorflow as tf
@@ -18,13 +19,20 @@ from tensorflow.keras.applications import InceptionResNetV2 #flag = 3
 import warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--model_dir', help='Path to Save the Models.', default='Models')
+parser.add_argument('--epochs', help='Number of Epochs', default=50)
+parser.add_argument('--aug_no', help='Number of Augmentations per class', default=0)
+parser.add_argument('--flag', help='Model type 0 to 3.', default=0)
+args = parser.parse_args()
+
 img_folder=r'DSS'
 
 #parameters to be chosen 
 #flag = 0 is the implemented CNN
-flag = 3
-n_epochs = 50
-number_of_augmentations_per_class = 0 #if set to 0 -  no data augmentation
+flag = args.flag
+n_epochs = args.epochs
+number_of_augmentations_per_class = args.aug_no #if set to 0 -  no data augmentation
 
 #some transfer learning models are trained on larger image width and height than in our data set and do not work 
 #on smaller sizes
@@ -216,7 +224,9 @@ def train(flag, IMG_WIDTH, IMG_HEIGHT, X_train, y_train, X_val, y_val):
         filename = 'ResNet50.sav'
     if flag == 3:
         filename = 'InceptionResNetV2'
-    pickle.dump(model, open(filename, 'wb'))
+
+    os.makedirs(args.model_dir, exist_ok=True)
+    pickle.dump(model, open(f"{args.model_dir}/{filename}", 'wb'))
     return filename, history
 
 
