@@ -1,6 +1,6 @@
 # Hand Written Recognition Project
 
-## Task 1
+## Task 1 and 2
 
 First, ensure to have Python version 3.8.
 Then, install the required packages using the following command:
