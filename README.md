@@ -14,7 +14,7 @@ Keep your images in one folder. Our model is only designed for binary image.
 You can pass the folder path of images by using `--image_path "Path/to/Folder"`
 
 
-## Character segmentation using prtrained model
+## Character segmentation using pretrained model
 We have 4 different models. The pretrained models can be found [here.](https://drive.google.com/drive/folders/1NqDdevh42zpoUPsWMux6de33plXEdUpB). 
 We recommend to download the InceptionResNetV2, since it yielded the highest accuracy on the test data. 
 Then, pass the path of the classifier using `--classifier_path "Path/of/model"
@@ -53,7 +53,17 @@ Example:
 python classifier_pipeline.py --flag 0 --model_dir "models" --epochs 50 --aug_no 0
 ```
 
+## Sliding Window
 
+This approach is also optional and not our best performing approach, however, we include it due to matters of completeness. 
+For evaluating the accuracy of our pipeline please follow the stepts in the section 'Character segmentation using pretrained model' above.
+
+Again, after downloading the pretrained classifier you can choose the classifier by the aforementioned flags.
+Example: 
+
+```
+python sliding_window.py --image_path "Path/to/images" --classifier_path "Path/to/model" --flag 3
+```
 
 
 
