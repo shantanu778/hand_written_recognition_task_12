@@ -58,9 +58,11 @@ def line_segment(imageName,originalImage,detectedLineImage, outputDir, threshold
         t = originalImage[low_y:high_y,:]
             
         t = clean_line(t)
-        total_lines.append(t)
+        # total_lines.append(t)
         try:
+            total_lines.append(t)
             cv2.imwrite(f"{outputDir}/{imageName}/line_{i+1}.png",t)
+            
         except:
             print("empty lines")
     

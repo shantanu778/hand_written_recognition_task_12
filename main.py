@@ -49,13 +49,19 @@ def main():
         file1 = open(f"{folder}/{image_names[idx]}_characters.txt","a")#append mode
         for id, characters in enumerate(file):
             letters, values = classify(characters, loaded_model, IMG_WIDTH, IMG_HEIGHT)
+            values.reverse()
             print("Classify Finished", imageName)
             ascii = map_characters(values)
             ascii = [c for c in ascii if c is not None]
             for s in total_spaces[idx][id]:
-                ascii.insert(s, "#")
+                if s == -100:
+                    ascii.insert(s, "@")
+                else:
+                    ascii.insert(s, "#")
+
             s = str("".join(ascii))
             s = s.replace('#',' ')
+            s = s.replace('@','\n')
             s ="".join(s)
             # print(s)
             file1.write(s)

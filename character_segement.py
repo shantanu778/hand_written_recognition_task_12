@@ -11,16 +11,16 @@ import matplotlib.pyplot as plt
 rng.seed(12345)
 
 def segment_character(line, image_name, line_idx, verbose):
-    #print(line.shape)
+    # print(line.shape)
 
     kernel = np.ones((3, 3), np.uint8)
 
-    ret,thresh_img = cv.threshold(line, 150, 255, cv.THRESH_BINARY)
+    # ret,thresh_img = cv.threshold(line, 150, 255, cv.THRESH_BINARY)
 
     #Applying erosion
     #erode_img = cv.erode(thresh_img, kernel, iterations=1)
 
-    dilate_img = cv.dilate(thresh_img, kernel, iterations=1)
+    dilate_img = cv.dilate(line, kernel, iterations=1)
 
     # cv.imshow('Binary Image', dilate_img)
     # cv.waitKey(1000)
@@ -54,7 +54,7 @@ def segment_character(line, image_name, line_idx, verbose):
             width = stats[i][2]
             y = stats[i][1]
             height = stats[i][3]
-            if width >= 10:
+            if width >= 6:
                 ROI = line[y:y+height,x:x+width]
                 image_list.append((ROI, x, width))
                 diff.append(width)
@@ -73,15 +73,15 @@ def segment_character(line, image_name, line_idx, verbose):
 
     # print(spaces)
     
-    total_char_std = 250
-    avg_width = math.ceil(median(diff))
+    total_char_std = 12.12
+    avg_width = math.ceil(mean(diff))
 
     #print(f"line_{line_idx}")
     #print(median(diff))
 
 
     current_std = np.std(np.array(diff))
-    #print(current_std)
+    print(current_std)
 
     character_list = []
 
@@ -117,16 +117,25 @@ def segment_character(line, image_name, line_idx, verbose):
 
 def segment_lines(src, verbose):
 
-    lines, image_name, output_dir = segment(src, outputDir = 'lines_output', verbose=verbose)
+    img = cv.imread('dummy.jpg')
 
-    print("Total Lines befor Segmentation", len(lines))
+    lines, image_name, output_dir = segment(src, outputDir = 'lines_output', verbose=verbose)
+    # lines.insert(3, img)
+
+    print("Total Lines before Segmentation", len(lines))
 
     total_spaces = []
     line_chars = []
     for idx, line in enumerate(lines):
-        character_list, spaces = segment_character(line, image_name, idx, verbose)
-        line_chars.append(character_list)
-        total_spaces.append(spaces)
+        # print(line)
+        if line is not None:
+            character_list, spaces = segment_character(line, image_name, idx, verbose)
+            line_chars.append(character_list)
+            total_spaces.append(spaces)
+        else:
+            print("no line detected")
+            total_spaces.append([-100]) 
+            pass
 
     print("Total Lines after Character Segmentation", len(line_chars))
     return line_chars, total_spaces
