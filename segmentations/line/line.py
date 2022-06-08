@@ -21,10 +21,11 @@ def segment(imagePath, outputDir, verbose=False):
         os.mkdir(f"{outputDir}/{imageName}")
 
     if verbose == True:
-    	if not os.path.exists(f"{outputDir}/{imageName}/detected_lines"):
-        	os.mkdir(f"{outputDir}/{imageName}/detected_lines")
+        if not os.path.exists(f"{outputDir}/{imageName}/detected_lines"):
+            os.mkdir(f"{outputDir}/{imageName}/detected_lines")
     
-    detectedLineImages = []
+    
+    detectedLineImages = list()
     
     for  output, angle in predictions:
         
@@ -55,16 +56,5 @@ def segment(imagePath, outputDir, verbose=False):
     return lines, imageName, outputDir
 
 
-
-
-
-
-if __name__ == '__main__':
-
-    inputDir = "../../Dataset/Binarized/P21-Fg006-R-C01-R01-binarized.jpg"
-    modelPath = "./models/model100_ema.pb"
-    
-    # To print intermediary images set verbose to True
-    run(inputDir,'Outputs',verbose=False)
 
     

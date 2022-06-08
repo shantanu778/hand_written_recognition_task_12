@@ -105,7 +105,7 @@ def segment_character(line, image_name, line_idx, verbose):
         for idx, item in enumerate(image_list[1:]):
             character_list.append(item[0])
 
-    if verbose==1:
+    if verbose:
         folder = f"characters/{image_name}/line_{line_idx}/"
         os.makedirs(folder, exist_ok = True)
         for idx, img in enumerate(character_list):

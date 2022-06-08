@@ -3,20 +3,18 @@ import os
 from character_segement import *
 from char_classifier import *
 from map_character import *
-import glob
-import re 
 import pickle
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--image_path', help='Path to input image.', default='test_image')
-    parser.add_argument('--classifier_path', help='Path to Pretrained Model to Classify Character.', default='cnn.sav')
-    parser.add_argument('--verbose', help='1 or 0 for saving character images.', default=0)
-    parser.add_argument('--flag', help='Model type 0 to 3.', default=0)
+    parser.add_argument('--image_path', type = str, help='Path to input image.', default='test_image')
+    parser.add_argument('--classifier_path', type = str, help='Path to Pretrained Model to Classify Character.', default='cnn.sav')
+    parser.add_argument('--verbose', action= 'store_true', help='use this argumnent save intermediary images')
+    parser.add_argument('--flag', type = int, help='Model type 0 to 3.', default=0)
     args = parser.parse_args()
 
-    if int(args.flag) == 0:
+    if args.flag == 0:
         IMG_WIDTH = 60
         IMG_HEIGHT = 40
     else:
@@ -32,7 +30,7 @@ def main():
         imageName = file.split("/")[-1].split(".")[0]
         print(imageName)
         image_names.append(imageName)
-        line_chars, total_space = segment_lines(file, int(args.verbose))
+        line_chars, total_space = segment_lines(file, args.verbose)
         total_files.append(line_chars)
         total_spaces.append(total_space) 
 

@@ -2,3 +2,8 @@ test_image
 _pycache_/
 *.py[cod]
 *$py.class
+.ipynb_checkpoints
+env
+results
+characters
+lines_output
