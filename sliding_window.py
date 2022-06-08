@@ -113,7 +113,7 @@ def main():
             image= np.array(image)
             image = image.astype('float32')
             image /= 255 
-            print(image.shape)
+            # print(image.shape)
             windows = sliding_window(image, stepSize, window_width, window_height)
             pred_set = resize(windows, IMG_WIDTH, IMG_HEIGHT)
             prediction = loaded_model.predict(x=np.array(pred_set, np.float32))

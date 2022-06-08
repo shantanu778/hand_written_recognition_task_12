@@ -81,7 +81,7 @@ def segment_character(line, image_name, line_idx, verbose):
 
 
     current_std = np.std(np.array(diff))
-    print(current_std)
+    # print(current_std)
 
     character_list = []
 
