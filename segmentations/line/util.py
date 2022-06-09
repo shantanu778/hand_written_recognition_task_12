@@ -57,10 +57,12 @@ def line_segment(imageName,originalImage,detectedLineImage, outputDir, threshold
         highlightedImage = cv2.rectangle(highlightedImage,(0,low_y),(originalImage.shape[1],high_y),(255,255,51),5)
         t = originalImage[low_y:high_y,:]
             
-        t = clean_line(t)
+        # t = clean_line(t)
         try:
+            cv2.imwrite(f"{outputDir}/{imageName}/line_{i+1}_noise.png",t)
+            t = clean_line(t)
             total_lines.append(t)
-            cv2.imwrite(f"{outputDir}/{imageName}/line_{i+1}.png",t)
+            cv2.imwrite(f"{outputDir}/{imageName}/line_{i+1}_cleaned.png",t)
             
         except:
             print("empty lines")

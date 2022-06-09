@@ -1,4 +1,5 @@
 from __future__ import print_function
+import re
 from statistics import mean, median
 import math
 import cv2 as cv
@@ -14,20 +15,8 @@ def segment_character(line, image_name, line_idx, verbose):
     # print(line.shape)
 
     kernel = np.ones((3, 3), np.uint8)
-
-    # ret,thresh_img = cv.threshold(line, 150, 255, cv.THRESH_BINARY)
-
-    #Applying erosion
-    #erode_img = cv.erode(thresh_img, kernel, iterations=1)
-
     dilate_img = cv.dilate(line, kernel, iterations=1)
-
-    # cv.imshow('Binary Image', dilate_img)
-    # cv.waitKey(1000)
-
     edges = cv.Canny(dilate_img, 100, 150, 3)
-
-
     contours, hierarchy = cv.findContours(edges, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
 
 
@@ -35,9 +24,6 @@ def segment_character(line, image_name, line_idx, verbose):
     img_contours = np.zeros(edges.shape)
 
     cv.drawContours(img_contours, contours, -1, (255), 2)
-
-    #cv.imshow('Contours', img_contours)
-
     img_contours = np.uint8(img_contours)
 
 
@@ -63,6 +49,9 @@ def segment_character(line, image_name, line_idx, verbose):
 
     # print(diff)
 
+    if len(image_list)==0 and len(diff)==0:
+        return None, None
+
     image_list = sorted(image_list, key = lambda x: x[1])
 
     spaces = []
@@ -74,14 +63,13 @@ def segment_character(line, image_name, line_idx, verbose):
     # print(spaces)
     
     total_char_std = 12.12
-    avg_width = math.ceil(mean(diff))
 
-    #print(f"line_{line_idx}")
-    #print(median(diff))
+    if len(diff)>0:
+        avg_width = math.ceil(mean(diff))
+        current_std = np.std(np.array(diff))
 
-
-    current_std = np.std(np.array(diff))
-    # print(current_std)
+    else:
+        current_std = total_char_std
 
     character_list = []
 
@@ -102,7 +90,7 @@ def segment_character(line, image_name, line_idx, verbose):
                     character_list.append(split)
 
     else:
-        for idx, item in enumerate(image_list[1:]):
+        for idx, item in enumerate(image_list):
             character_list.append(item[0])
 
     if verbose:
@@ -110,7 +98,10 @@ def segment_character(line, image_name, line_idx, verbose):
         os.makedirs(folder, exist_ok = True)
         for idx, img in enumerate(character_list):
             path = f"{folder}/charater_{idx+1}.png"
-            cv.imwrite(path, img)
+            try:
+                cv.imwrite(path, img)
+            except:
+                print("Empty Charset")
     
     return character_list, spaces
 
@@ -130,8 +121,13 @@ def segment_lines(src, verbose):
         # print(line)
         if line is not None:
             character_list, spaces = segment_character(line, image_name, idx, verbose)
-            line_chars.append(character_list)
-            total_spaces.append(spaces)
+            if character_list is not None and len(character_list)>0:
+                line_chars.append(character_list)
+                total_spaces.append(spaces)
+            else:
+                print("no chars detected")
+                total_spaces.append([-100]) 
+                pass
         else:
             print("no line detected")
             total_spaces.append([-100]) 
