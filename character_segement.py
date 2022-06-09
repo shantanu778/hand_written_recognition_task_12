@@ -126,10 +126,12 @@ def segment_lines(src, verbose):
                 total_spaces.append(spaces)
             else:
                 print("no chars detected")
+                line_chars.append(list())
                 total_spaces.append([-100]) 
                 pass
         else:
             print("no line detected")
+            line_chars.append(list())
             total_spaces.append([-100]) 
             pass
 
