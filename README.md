@@ -17,7 +17,7 @@ You can pass the folder path of images by using `--image_path "Path/to/Folder"`
 ## Character segmentation using pretrained model
 We have 4 different models. The pretrained models can be found [here.](https://drive.google.com/drive/folders/1NqDdevh42zpoUPsWMux6de33plXEdUpB). 
 We recommend to download the InceptionResNetV2, since it yielded the highest accuracy on the test data. 
-Then, pass the path of the classifier using `--classifier_path "Path/of/model"
+Then, pass the path of the classifier using `--classifier_path "Path/of/model"`
 
 Use the corresponding *flag* from the following list based on the model you are using for results:
 

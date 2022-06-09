@@ -106,7 +106,7 @@ class Inference_pb(object):
         rotatedImages = []
         for d in range(-threshold,threshold+1):
             M = cv2.getRotationMatrix2D((cX, cY), d, 1.0)
-            rotated = cv2.warpAffine(image, M, (w, h))            
+            rotated = cv2.warpAffine(image, M, (w, h))                   
             rotatedImages.append((rotated,d))
         
 
