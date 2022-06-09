@@ -62,6 +62,9 @@ def map_characters(uniques):
     sentence = np.array(uniques)
     ascii = []
     for letter in sentence:
-        ascii.append(map(letter))
+        try:
+            ascii.append(map(letter))
+        except:
+            ascii.append(" ")
 
     return ascii

@@ -74,7 +74,7 @@ def segment_character(line, image_name, line_idx, verbose):
     character_list = []
 
     if current_std > total_char_std:
-        difference = np.percentile(np.array(diff),90)
+        difference = np.percentile(np.array(diff), 90)
         # print("difference", difference)
         for idx, item in enumerate(image_list):
             # print("item", item[-1])
@@ -84,10 +84,10 @@ def segment_character(line, image_name, line_idx, verbose):
             else:
                 counter = math.ceil(img.shape[-1]/avg_width)
                 # print(img.shape[-1], counter)
-                for i in range(counter):
-                    split = img[:, avg_width*i :avg_width*(i+1)] 
-                    # print(split.shape)
-                    character_list.append(split)
+                for i in range(1, counter+1):
+                    if avg_width*i < img.shape[-1] and avg_width*(i+1) < img.shape[-1]:
+                        split = img[:, avg_width*i :avg_width*(i+1)] 
+                        character_list.append(split)
 
     else:
         for idx, item in enumerate(image_list):
